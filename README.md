@@ -2,6 +2,18 @@
 
 An intelligent invoice-payment reconciliation system leveraging OpenAI GPT-4o-mini to automate bookkeeping for small businesses. Built with Spring Boot, PostgreSQL, and modern Java practices.
 
+## Live Demo
+
+**Frontend**: [https://mybillbookflobiz.netlify.app/login](https://mybillbookflobiz.netlify.app/login)
+**Backend API**: [https://mybillbook-production-b75a.up.railway.app](https://mybillbook-production-b75a.up.railway.app)
+**Demo Video**: [Watch on Loom](https://www.loom.com/share/bec62872c1df40739e01966ba5e8dfe9)
+**GitHub**: [https://github.com/AyushJHANWAR03/Mybillbook](https://github.com/AyushJHANWAR03/Mybillbook)
+
+**Quick Test**:
+1. Visit the [login page](https://mybillbookflobiz.netlify.app/login)
+2. Click "Fill Demo Credentials"
+3. Login and explore the AI reconciliation in action!
+
 ## Problem Statement
 
 Small businesses struggle with manual payment reconciliation:
