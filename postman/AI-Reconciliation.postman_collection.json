@@ -1,0 +1,402 @@
+{
+  "info": {
+    "name": "AI Invoice Reconciliation API",
+    "description": "Complete API collection for myBillBook AI-powered invoice reconciliation system",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobileNumber\": \"9876543210\",\n  \"name\": \"Ramesh\",\n  \"businessName\": \"Ramesh Medical Store\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Invoices",
+      "item": [
+        {
+          "name": "Upload Invoices (Bulk)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"invoiceNumber\": \"INV101\",\n    \"customerName\": \"Suresh Traders\",\n    \"totalAmount\": 10000,\n    \"pendingAmount\": 10000,\n    \"invoiceDate\": \"2025-01-15\",\n    \"status\": \"UNPAID\"\n  },\n  {\n    \"invoiceNumber\": \"INV102\",\n    \"customerName\": \"Mukesh Pharma\",\n    \"totalAmount\": 25000,\n    \"pendingAmount\": 15000,\n    \"invoiceDate\": \"2025-01-16\",\n    \"status\": \"PARTIALLY_PAID\"\n  },\n  {\n    \"invoiceNumber\": \"INV103\",\n    \"customerName\": \"Rajesh Stores\",\n    \"totalAmount\": 5000,\n    \"pendingAmount\": 5000,\n    \"invoiceDate\": \"2025-01-17\",\n    \"status\": \"UNPAID\"\n  }\n]"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/invoices/upload?userId={{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "invoices", "upload"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Invoices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/invoices/all?userId={{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "invoices", "all"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Invoices by Status (UNPAID)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/invoices?userId={{userId}}&status=UNPAID",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "invoices"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                },
+                {
+                  "key": "status",
+                  "value": "UNPAID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Invoices by Status (PARTIALLY_PAID)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/invoices?userId={{userId}}&status=PARTIALLY_PAID",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "invoices"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                },
+                {
+                  "key": "status",
+                  "value": "PARTIALLY_PAID"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Upload Payments (Bulk)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"amount\": 5000,\n    \"paymentDate\": \"2025-01-20\",\n    \"paymentMode\": \"UPI\",\n    \"remark\": \"INV101 partial payment\",\n    \"status\": \"UNRECONCILED\"\n  },\n  {\n    \"amount\": 10000,\n    \"paymentDate\": \"2025-01-21\",\n    \"paymentMode\": \"CASH\",\n    \"remark\": \"mukesh invoice 102\",\n    \"status\": \"UNRECONCILED\"\n  },\n  {\n    \"amount\": 5000,\n    \"paymentDate\": \"2025-01-22\",\n    \"paymentMode\": \"BANK_TRANSFER\",\n    \"remark\": \"rajesh stores bill\",\n    \"status\": \"UNRECONCILED\"\n  }\n]"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/payments/upload?userId={{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "payments", "upload"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Payments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/payments/all?userId={{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "payments", "all"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Unreconciled Payments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/payments?userId={{userId}}&status=UNRECONCILED",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "payments"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                },
+                {
+                  "key": "status",
+                  "value": "UNRECONCILED"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "AI Reconciliation",
+      "item": [
+        {
+          "name": "Run AI Reconciliation",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reconciliation/run?userId={{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reconciliation", "run"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Pending Suggestions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reconciliation/suggestions?userId={{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reconciliation", "suggestions"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Confirm Suggestion",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reconciliation/confirm/1?userId={{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reconciliation", "confirm", "1"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reject Suggestion",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reconciliation/reject/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reconciliation", "reject", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Bulk Confirm Suggestions",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[1, 2, 3, 4, 5]"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reconciliation/bulk-confirm?userId={{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reconciliation", "bulk-confirm"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Bulk Confirm High Confidence (>0.90)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reconciliation/bulk-confirm-high-confidence?userId={{userId}}&minConfidence=0.90",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reconciliation", "bulk-confirm-high-confidence"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                },
+                {
+                  "key": "minConfidence",
+                  "value": "0.90"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Get Summary Report",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/summary?userId={{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "summary"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Health & Documentation",
+      "item": [
+        {
+          "name": "Swagger UI",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/swagger-ui.html",
+              "host": ["{{baseUrl}}"],
+              "path": ["swagger-ui.html"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API Docs (JSON)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api-docs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api-docs"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

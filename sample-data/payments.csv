@@ -1,0 +1,31 @@
+amount,payment_date,payment_mode,remark
+5000.00,2025-03-15,UPI,suresh bill payment
+10000.00,2025-03-16,CASH,mukesh partial INV002
+5000.00,2025-03-17,BANK_TRANSFER,rajesh stores payment
+7500.00,2025-03-18,UPI,INV009 sanjay full
+15000.00,2025-03-19,CASH,dinesh medical inv004
+12000.00,2025-03-20,UPI,kumar traders invoice 6
+10000.00,2025-03-21,BANK_TRANSFER,vijay partial payment
+8000.00,2025-03-22,CARD,ramesh enterprises full payment inv005
+20000.00,2025-03-23,UPI,anil invoice008 remaining
+6000.00,2025-03-24,CASH,naresh inv 13
+18000.00,2025-03-25,BANK_TRANSFER,prakash medical bill
+9000.00,2025-03-26,UPI,ganesh stores inv11
+11000.00,2025-03-27,CASH,kapil payment invoice 15
+16000.00,2025-03-28,UPI,sunil bill INV014
+22000.00,2025-03-29,BANK_TRANSFER,mahesh pharma full
+13000.00,2025-03-30,UPI,amit distributors inv016
+8500.00,2025-03-31,CASH,sohan pharma invoice19
+19000.00,2025-04-01,UPI,rohit traders inv17
+14000.00,2025-04-02,BANK_TRANSFER,tarun stores payment inv20
+24000.00,2025-04-03,CASH,mohan medical bill
+17000.00,2025-04-04,UPI,varun inv021
+21000.00,2025-04-05,BANK_TRANSFER,karan medical invoice 22
+9500.00,2025-04-06,CASH,arjun pharma inv23
+12500.00,2025-04-07,UPI,bharat stores bill
+15500.00,2025-04-08,BANK_TRANSFER,chetan payment inv025
+18500.00,2025-04-09,CASH,deepak traders invoice26
+7000.00,2025-04-10,UPI,farhan pharma inv28
+20500.00,2025-04-11,BANK_TRANSFER,eshan medical payment
+11500.00,2025-04-12,CASH,gaurav stores inv29
+13500.00,2025-04-13,UPI,harish traders bill inv030

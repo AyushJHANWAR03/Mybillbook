@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: mybillbook-postgres
+    environment:
+      POSTGRES_DB: mybillbook
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mybillbook-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: mybillbook-app
+    ports:
+      - "8080:8080"
+    environment:
+      # Database Configuration
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: mybillbook
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+
+      # Spring Profile
+      SPRING_PROFILES_ACTIVE: dev
+
+      # OpenAI Configuration
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_MODEL: gpt-4o-mini
+      OPENAI_MAX_TOKENS: 1000
+      OPENAI_TEMPERATURE: 0.3
+      OPENAI_TIMEOUT: 30000
+
+      # Server Configuration
+      SERVER_PORT: 8080
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - mybillbook-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  mybillbook-network:
+    driver: bridge
